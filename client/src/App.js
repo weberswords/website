@@ -18,7 +18,6 @@ function App() {
           rel="noopener noreferrer"
         >
           <Home/>
-          Home goes here ^^^
         </a>
       </header>
     </div>
