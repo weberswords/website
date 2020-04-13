@@ -1,0 +1,29 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  deploy-prod:
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - run: echo $DROPLET_USER
+      - add_ssh_keys
+      - run: ssh-keyscan 167.172.202.218 >> ~/.ssh/known_hosts
+      - run: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@167.172.202.218 './deploy_project.sh'
+  build-and-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm test
+workflows:
+    build-and-test:
+      jobs:
+        - build-and-test
+    deploy:
+      jobs:
+        - deploy-prod
