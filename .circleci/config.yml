@@ -11,16 +11,23 @@ jobs:
       - add_ssh_keys
       - run: ssh-keyscan 167.172.202.218 >> ~/.ssh/known_hosts
       - run: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@167.172.202.218 './deploy_project.sh'
-  build-and-test:
+  build-and-test-client:
     executor:
       name: node/default
     steps:
       - checkout
       - run: cd ./client && npm install && npm test
+  build-and-test-server:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - run: cd ./server && npm install && npm test
 workflows:
     build-and-test:
       jobs:
-        - build-and-test
+        - build-and-test-client
+        - build-and-test-server
     deploy:
       jobs:
         - deploy-prod
