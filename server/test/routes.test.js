@@ -11,3 +11,18 @@ describe('Hello world', function() {
 		})
 	})
 })
+
+describe('Posts', function () {
+	describe('GET posts', function () {
+		it('should return 200', function (done) {
+			request(app)
+				.get('/api/allposts')
+				.expect(200, done)
+		});
+
+		//should have content in result body
+		//should handle empty result
+		//should handle timeout
+		
+	})
+})
