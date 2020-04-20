@@ -1,4 +1,7 @@
-var assert = require('chai').assert;
+var chai = require('chai');
+var assert = chai.assert;
+var should = chai.should;
+var expect = chai.expect;
 var request = require('supertest');
 var app = require('../main/app');
 
@@ -21,8 +24,15 @@ describe('Posts', function () {
 		});
 
 		//should have content in result body
-		//should handle empty result
-		//should handle timeout
-		
+		it('should have content in the result body', function (done) {
+			request(app)
+				.get('/api/allposts')
+				.expect(200)
+				.expect('Content-type', /json/)
+				.end((err, res) => {
+					expect(res).not.to.be.undefined;
+					done();
+				});
+		})
 	})
 })
