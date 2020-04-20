@@ -31,6 +31,7 @@ describe('Posts', function () {
 				.expect('Content-type', /json/)
 				.end((err, res) => {
 					expect(res).not.to.be.undefined;
+					expect(res).to.be.an('object');
 					done();
 				});
 		})
