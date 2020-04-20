@@ -1,23 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Post from '../Posts/post';
 
 import axios from 'axios';
 
 const Home = props => {
-	useEffect(() => {
-		axios.get('/api/allposts')
-		.then(res => setPosts(res.data))
-	}, [])
+	const [posts, setPosts] = useState([])
+
+	const getPosts = () => {
+		try {
+			console.log(`Getting posts...`);
+			axios.get('/api/allposts')
+				.then(res => setPosts(res.data))
+			console.log(res.data)
+		} catch (e) {
+			console.log(`😢 Axios request failed: ${e}`);
+		}
+	}
 
 	const renderPosts = (posts) => {
-		return posts.length < 1 ? "There are no posts." :  "There are posts.";
+		getPosts();
+		if (posts.length < 1) {
+			return "There are no posts.";
+		} 
+		else {
+			console.log(`The title is ${posts[0].title}.`);
+			// Update this to a map. Idk why it's not working but I'm tired and I'll try again later.
+			for (const post of posts) {
+			 return <Post
+						pid={post.author}
+						title={post.title}
+						author={post.author}
+						body={post.body}
+					/>
+			}
+		}
 	}
 
 	const arePosts = (posts) => {
 		return posts.length < 1 ? "noPosts" :  "posts";
 	}
-
-	const [posts, setPosts] = useState([])
 
 	return(
 		<div>
