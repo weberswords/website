@@ -5,17 +5,26 @@ import axios from 'axios';
 
 const Home = props => {
 	useEffect(() => {
-		axios.get('/api/hello')
+		axios.get('/api/allposts')
 		.then(res => setState(res.data))
 	}, [])
 
-	const [state, setState] = useState('')
+	const renderPosts = (posts) => {
+		return posts.length < 1 ? "There are no posts." :  "There are posts.";
+	}
+
+	const arePosts = (posts) => {
+		return posts.length < 1 ? "noPosts" :  "posts";
+	}
+
+	const [posts, setPosts] = useState([])
 
 	return(
 		<div>
 			<h1 id="homeTitle">Home</h1>
-			<p>{state}</p>
-			<Post />
+			<p id={arePosts(posts)}>
+				{renderPosts(posts)}
+			</p>
 		</div>
 		)
 };
