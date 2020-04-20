@@ -1,7 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import axios from 'axios';
-import moxios from 'moxios';
 import sinon from 'sinon';
 
 import Home from './home';
