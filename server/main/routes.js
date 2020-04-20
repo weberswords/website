@@ -18,7 +18,12 @@ router.get('/api/allposts', (req, res, next) => {
 				console.log(`An error has occurred: \n ${query_error}`)
 			}
 			console.log(`Result returned.`)
-			res.json(query_result.rows)
+			if (query_result.rows) {
+				res.json(query_result.rows)	
+			} else {
+				res.json(query_result)
+			}
+			
 	})
 })
 
