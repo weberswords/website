@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Post from '../Posts/post';
 
 import axios from 'axios';
 
@@ -12,8 +13,9 @@ const Home = props => {
 
 	return(
 		<div>
-		Home
-		<p>{state}</p>
+			<h1 id="homeTitle">Home</h1>
+			<p>{state}</p>
+			<Post />
 		</div>
 		)
 };

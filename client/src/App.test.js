@@ -1,9 +1,18 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { mount } from 'enzyme';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/Home/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe('app', () => {
+	let app;
+
+	beforeAll(() => {
+		app = mount(
+			<App />);
+
+	})
+	it('renders header', () => {
+		  const header = app.find('header.App-header');
+		  expect(header).toBeTruthy();
+	});
+
+})
