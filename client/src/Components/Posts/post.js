@@ -7,8 +7,8 @@ const Post = props => {
 	return(
 		<div>
 			<h1>{props.title}</h1>
-			<p>by: {props.author}</p>
-			<p>
+			<p id="author">by: {props.author}</p>
+			<p id="body">
 				{props.body}
 			</p>
 		</div>
