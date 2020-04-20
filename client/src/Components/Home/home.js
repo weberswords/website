@@ -6,7 +6,7 @@ import axios from 'axios';
 const Home = props => {
 	useEffect(() => {
 		axios.get('/api/allposts')
-		.then(res => setState(res.data))
+		.then(res => setPosts(res.data))
 	}, [])
 
 	const renderPosts = (posts) => {
