@@ -46,7 +46,12 @@ describe('Posts', () => {
 					uid: "1",
 					username: "webs"
 				})
-				.expect(200, done)
+				.expect(200)
+				.end((err, res) => {
+					if (err) done(err);
+					expect(res.status).to.equal(200);
+					done();
+				})
 		})
 	})
 })
