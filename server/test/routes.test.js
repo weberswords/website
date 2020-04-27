@@ -5,9 +5,9 @@ var expect = chai.expect;
 var request = require('supertest');
 var app = require('../main/app');
 
-describe('Hello world', function() {
-	describe('GET hello world', function () {
-		it('should return hello world', function (done) {
+describe('Hello world', () => {
+	describe('GET hello world', () => {
+		it('should return hello world', (done) => {
 			request(app)
 				.get('/api/hello')
 				.expect(200, done)
@@ -15,16 +15,16 @@ describe('Hello world', function() {
 	})
 })
 
-describe('Posts', function () {
-	describe('GET posts', function () {
-		it('should return 200', function (done) {
+describe('Posts', () => {
+	describe('GET posts', () => {
+		it('should return 200', (done) => {
 			request(app)
 				.get('/api/allposts')
 				.expect(200, done)
 		});
 
 		//should have content in result body
-		it('should have content in the result body', function (done) {
+		it('should have content in the result body', (done) => {
 			request(app)
 				.get('/api/allposts')
 				.expect(200)
@@ -34,6 +34,19 @@ describe('Posts', function () {
 					expect(res).to.be.an('object');
 					done();
 				});
+		})
+	})
+	describe('POST posts', () => {
+		it('should return 200', (done) => {
+			request(app)
+				.post('/api/posts')
+				.send({
+					title: "second post",
+					body: "some text bacon",
+					uid: "1",
+					username: "webs"
+				})
+				.expect(200, done)
 		})
 	})
 })
