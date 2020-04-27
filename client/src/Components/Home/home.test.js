@@ -15,17 +15,9 @@ describe('home', () => {
 	it('renders text', () => {
 		const response = "There are no posts."
 	
-		const expected = "Home";
-		const outputTitle = home.find('#homeTitle').text();
-		expect(outputTitle).toEqual(expected);
+		const outputTitle = home.find('#home').text();
+		expect(outputTitle).toEqual(response);
 	});
-
-	it('renders no posts message when there are no posts', () => {
-		const response = []
-		const expected = "There are no posts."
-		const output = home.find('#noPosts').text();
-		expect(output).toEqual(expected);
-	})
 
 })
 
