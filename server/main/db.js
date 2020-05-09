@@ -8,6 +8,9 @@ const db = () => {
 		case "test":
 			return 'test_db';
 			break;
+		case "ci":
+			return 'circle_test';
+			break;
 		default:
 			return 'dev_db'
 	}

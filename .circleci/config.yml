@@ -6,6 +6,8 @@ jobs:
     docker:
       - image: circleci/node
       - image: circleci/postgres
+        environment:
+          TEST_DATABASE_URL: postgresql://root@localhost/circle_test
     steps:
       - checkout
       - run: echo $DROPLET_USER
@@ -28,11 +30,7 @@ jobs:
       - run: 
           name: db setup
           command: |
-            postgres psql
-            create database test_db;
-            create user postgres with encrypted password 'postgres';
-            grant all privileges on database test_db to postgres;
-            sequelize db:seed:all
+            NODE_ENV=ci sequelize db:seed:all
             npm run migrate:test
 workflows:
     build-and-test:
