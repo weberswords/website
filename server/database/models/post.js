@@ -1,22 +1,21 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Post = sequelize.define('Post', {
+  const post = sequelize.define('post', {
     title: DataTypes.STRING,
     content: DataTypes.TEXT,
     userId: DataTypes.INTEGER
   }, {});
-  Post.associate = function(models) {
-    Post.hasMany(models.Comment, {
+  post.associate = function(models) {
+    post.hasMany(models.comment, {
     	foreignKey: 'postId',
     	as: 'comments',
-    	onDelete: 'CASCADE',
+    	onDelete: 'CASCADE'
     });
-
-    Post.belongsTo(models.User, {
+    post.belongsTo(models.user, {
     	foreignKey: 'userId',
     	as: 'author',
-    	onDelete: 'CASCADE',
+    	onDelete: 'CASCADE'
     })
   };
-  return Post;
+  return post;
 };

@@ -1,57 +1,51 @@
-var chai = require('chai');
-var assert = chai.assert;
-var should = chai.should;
-var expect = chai.expect;
 var request = require('supertest');
 var app = require('../main/app');
 
 describe('Hello world', () => {
 	describe('GET hello world', () => {
-		it('should return hello world', (done) => {
-			request(app)
+		it('should return hello world', async () => {
+			const response = await request(app)
 				.get('/api/hello')
-				.expect(200, done)
+
+			expect(response.statusCode).toEqual(200)
+			expect(response.body).toEqual('hello world')
 		})
 	})
 })
 
 describe('Posts', () => {
 	describe('GET posts', () => {
-		it('should return 200', (done) => {
-			request(app)
+		it('should have content in the result body', async () => {
+			const response = await request(app)
 				.get('/api/allposts')
-				.expect(200, done)
-		});
-
-		//should have content in result body
-		it('should have content in the result body', (done) => {
-			request(app)
-				.get('/api/allposts')
-				.expect(200)
-				.expect('Content-type', /json/)
-				.end((err, res) => {
-					expect(res).not.to.be.undefined;
-					expect(res).to.be.an('object');
-					done();
-				});
+			expect(response.status).toEqual(200)
+			expect(response.body).toBeDefined()
 		})
 	})
+
 	describe('POST posts', () => {
-		it('should return 200', (done) => {
-			request(app)
+		it('should create a new post', async () => {
+			const response = await request(app)
 				.post('/api/posts')
 				.send({
-					title: "second post",
-					body: "some text bacon",
-					uid: "1",
-					username: "webs"
+					title: 'tdd is cool',
+					content: 'content',
+					uid: 1
 				})
-				.expect(200)
-				.end((err, res) => {
-					if (err) done(err);
-					expect(res.status).to.equal(200);
-					done();
-				})
+
+			expect(response.statusCode).toEqual(200)
+			expect(response.body).toBeDefined()
+			
+		})
+	})
+
+	describe('DELETE posts', () => {
+		it('should delete a post', async () => {
+			const response = await request(app)
+				.delete('/api/posts/1')
+
+			expect(response.status).toEqual(200)
+			expect(response.body).toBeDefined()
 		})
 	})
 })

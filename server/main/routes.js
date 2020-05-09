@@ -10,46 +10,65 @@ router.get('/api/hello', (req, res) => {
 	res.json('hello world')
 })
 
-router.get('/api/allposts', (req, res, next) => {
-	pool.query(`SELECT * FROM posts ORDER BY date_created DESC`,
+router.get('/api/allposts', async (req, res, next) => {
+	try {
+		const result = await pool.query(`SELECT * FROM posts ORDER BY "createdAt" DESC`,
 		(query_error, query_result) => {
-			console.log("Making request...")
+			console.log("Making get request...")
 			if (query_error) {
-				console.log(`😢 An error has occurred: \n ${query_error}`)
+				console.log(`😢 An error has occurred: \n${query_error}`)
+				return next(query_error)
 			}
 			console.log(`Result returned.`)
-			if (query_result.rows) {
+
+			if (query_result.rowCount > 0) {
 				res.json(query_result.rows)	
 			} else {
 				res.json(query_result)
 			}
-			
-	})
+		})
+	} catch(error) {
+		console.log(`Oh no! ${error}`)
+		next(error)
+	}
+	
 })
 
 router.post('/api/posts', (req, res, next) => {
 	const postPayload = [
 		req.body.title,
-		req.body.body,
-		req.body.uid,
-		req.body.username
+		req.body.content,
+		req.body.uid
 	]
-
-	console.log(postPayload);
  
-	pool.query(`INSERT INTO posts(title, body, user_id, author, date_created) VALUES($1, $2, $3, $4, NOW())`,
+	pool.query(`INSERT INTO posts(title, content, "userId", "createdAt", "updatedAt") VALUES($1, $2, $3, now(), now())`,
 		postPayload, (query_error, query_result) => {
+			console.log("Making post request...")
 			if(query_error) {
-				console.log(`😢 An error has occurred: \n ${query_error}`)
+				console.log(`😢 An error has occurred: \n${query_error}`)
 				return next(query_error);
-			}
-			console.log(`Result returned.`)
-			if (query_result.rows) {
-				res.json(query_result.rows)
 			} else {
-				res.json(query_result)
+				console.log(`Result returned.`)
+				return res.json(query_result);	
 			}
-		})
+		}
+	)
+})
+
+router.delete('/api/posts/:postid', (req, res, next) => {
+	const postid = req.params.postid
+	pool.query(`DELETE FROM posts WHERE id=$1`,
+		[postid], (query_error, query_result) => {
+			console.log("Making delete request...")
+			if(query_error) {
+				console.log(`😢 An error has occurred: \n${query_error}`)
+				return next(query_error);
+			} else {
+				console.log(`Result returned.`)
+				return res.json(query_result);	
+			}
+		}
+	)
 })
 
 module.exports = router

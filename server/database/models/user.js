@@ -1,20 +1,22 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    name: DataTypes.STRING,
-    email: DataTypes.STRING
+  const user = sequelize.define('user', {
+    username: DataTypes.STRING,
+    email: DataTypes.STRING,
+    isVerified: DataTypes.BOOLEAN,
   }, {});
-  User.associate = function(models) {
-    User.hasMany(models.Post, {
+  user.associate = function(models) {
+    user.hasMany(models.post, {
     	foreignKey: 'userId',
     	as: 'posts',
-    	onDelete: 'CASCADE',
+    	onDelete: 'CASCADE'
     });
-    User.hasMany(models.Comment, {
+
+    user.hasMany(models.comment, {
     	foreignKey: 'userId',
     	as: 'comments',
-    	onDelete: 'CASCADE',
+    	onDelete: 'CASCADE'
     })
   };
-  return User;
+  return user;
 };
