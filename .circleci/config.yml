@@ -25,12 +25,12 @@ jobs:
       - checkout
       - run: apt-get install postgresql-client
       - run: 
-          - name: npm install
-          - command: |
-          cd ./server && npm install
-          createdb test_db -U postgres
-          sequelize db:seed:all
-          npm run migrate:test
+          name: npm install
+          command: |
+            cd ./server && npm install
+            createdb test_db -U postgres
+            sequelize db:seed:all
+            npm run migrate:test
 workflows:
     build-and-test:
       jobs:
