@@ -5,6 +5,7 @@ jobs:
   deploy-prod:
     docker:
       - image: circleci/node
+      - image: postgres
     steps:
       - checkout
       - run: echo $DROPLET_USER
@@ -22,7 +23,7 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - run: cd ./server && npm install && npm test
+      - run: cd ./server && npm install && npm run migrate:test
 workflows:
     build-and-test:
       jobs:
