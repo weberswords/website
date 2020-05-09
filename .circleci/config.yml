@@ -23,11 +23,11 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - run: apt-get install postgresql-client
+      - run: sudo apt-get install postgresql-client
+      - run: cd ./server && npm install
       - run: 
-          name: npm install
+          name: db setup
           command: |
-            cd ./server && npm install
             createdb test_db -U postgres
             sequelize db:seed:all
             npm run migrate:test
