@@ -28,7 +28,7 @@ jobs:
       - run: 
           name: db setup
           command: |
-            psql
+            postgres psql
             create database test_db;
             create user postgres with encrypted password 'postgres';
             grant all privileges on database test_db to postgres;
