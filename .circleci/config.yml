@@ -48,7 +48,7 @@ workflows:
       jobs:
         - build-and-test-client
         - build-and-test-server
-        - deploy-prod
-          requires:
-            - build-and-test-client
-            - build-and-test-server
+        - deploy-prod:
+            requires:
+              - build-and-test-client
+              - build-and-test-server
