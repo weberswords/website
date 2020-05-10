@@ -31,7 +31,7 @@ jobs:
           name: db setup
           command: |
             cd ./server
-            npm i -g sequelize
+            sudo npm i -g sequelize
             NODE_ENV=ci sequelize db:seed:all
             npm run migrate:test
 workflows:
