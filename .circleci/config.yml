@@ -27,6 +27,7 @@ jobs:
       - image: circleci/postgres
         environment:
           POSTGRES_USER: root
+          POSTGRES_PASSWORD: justfortesting
           POSTGRES_DB: circle-test
     steps:
       - checkout
