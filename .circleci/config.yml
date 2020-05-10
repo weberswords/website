@@ -23,13 +23,12 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - run: sudo apt-get install postgresql-client
+      - run: sudo apt-get install postgresql-client &&  dockerize -wait tcp://localhost:5432 -timeout 1m
       - run: cd ./server && npm install
       - run: 
           name: db setup
           command: |
             cd ./server
-            dockerize -wait tcp://localhost:5432 -timeout 1m
             NODE_ENV=ci npx sequelize-cli db:seed:all
             npm run migrate:test
 workflows:
