@@ -7,8 +7,7 @@
     "start-dev": "nodemon index.js",
     "migrate": "npx sequelize-cli db:migrate",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
-    "migrate:test": "cross-env NODE_ENV=test npm run migrate:reset",
-    "test": "cross-env NODE_ENV=test jest --testTimeout=15000"
+    "test": "cross-env jest --testTimeout=15000"
   },
   "dependencies": {
     "axios": "^0.19.2",
