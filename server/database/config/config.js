@@ -12,5 +12,9 @@ module.exports = {
   production: {
     url: process.env.DATABASE_URL,
     dialect: 'postgres'
+  },
+  ci: {
+    url: process.env.CI_DATABASE_URL,
+    dialect: 'postgres'
   }
 }
