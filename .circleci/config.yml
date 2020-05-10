@@ -28,11 +28,11 @@ jobs:
         environment:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: justfortesting
-          POSTGRES_DB: circle-test
+          POSTGRES_DB: circle_test
     steps:
       - checkout
       - run: 
-          name: create db
+          name: connect to db
           command: |
             sudo apt-get install postgresql-client
             dockerize -wait tcp://localhost:5432 -timeout 1m
