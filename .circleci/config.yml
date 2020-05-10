@@ -24,7 +24,7 @@ jobs:
   build-and-test-server:
     docker:
       - image: circleci/node
-      - image: circleci/postgres:9.6.5-alpine-ram
+      - image: circleci/postgres
         environment:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: justfortesting
