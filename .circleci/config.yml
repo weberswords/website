@@ -30,6 +30,7 @@ jobs:
       - run: 
           name: db setup
           command: |
+            pwd
             NODE_ENV=ci sequelize db:seed:all
             npm run migrate:test
 workflows:
