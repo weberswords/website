@@ -36,7 +36,6 @@ jobs:
           command: |
             sudo apt-get install postgresql-client
             dockerize -wait tcp://localhost:5432 -timeout 1m
-            createdb -h localhost -p 5432 -U root circle-test
       - run: cd ./server && npm install
       - run: 
           name: db setup
