@@ -10,8 +10,8 @@ jobs:
       - checkout
       - run: echo $DROPLET_USER
       - add_ssh_keys
-      - run: ssh-keyscan 167.172.202.218 >> ~/.ssh/known_hosts
-      - run: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@167.172.202.218 './deploy_project.sh'
+      - run: ssh-keyscan $DROPLET_IP >> ~/.ssh/known_hosts
+      - run: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP './deploy_project.sh'
   build-and-test-client:
     executor:
       name: node/default
