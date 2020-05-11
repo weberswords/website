@@ -5,35 +5,43 @@ const Home = props => {
 	const [posts, setPosts] = useState([])
 
 	useEffect(() => {
+		const options = {
+			method: 'GET',
+			headers: {
+				Accept: 'application/json'
+			}
+		}
 		const fetchData = async () => {
-			const result = await fetch('/api/allposts');
-			setPosts(result.data);
+			await fetch('/api/allposts', options)
+				.then(response => {
+					if (response.ok) {
+						response.json().then(json => {
+							console.log(`POsts ahve resutnred: ${json}`)
+							setPosts(json)
+						})
+					}
+				});
 		};
 		fetchData();
 	}, []);
 
 	const renderPosts = posts => {
-		var postList = [];
-		if (posts.length < 1) {
-			return "There are no posts.";
+		let allPosts = []
+		if (posts.length > 0) {
+			posts.map(post => {
+				  allPosts.push(<Post
+					author={post.userId}
+					date={posts.createdAt}
+					title={post.title}
+					pid={post.id}
+					body={post.content}
+				/>)
+			})
+			return allPosts
+		} else {
+			return "There are no posts."
 		} 
-		else {
-			// Update this to a map. Idk why it's not working but I'm tired and I'll try again later.
-			for (const post of posts) {
-			  	console.log(`This post is ${post.title}`);
-			  	console.log(`date: ${post.date_created}`)
-			  	postList.push(<Post
-						pid={post.author}
-						title={post.title}
-						author={post.author}
-						body={post.body}
-						date={post.date_created}
-					/>)
-			}
-			return postList;
-		}
 	}
-
 
 	return(
 		<div id="home" className="full">
