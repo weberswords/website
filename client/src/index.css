@@ -1,9 +1,17 @@
+:root {
+	--pink: #CC4479;
+	--seafoam: #61DAAB;
+	--dark-grey: #4C4748;
+	--light-grey: #85919C;
+	--white: #F0F2EC;
+}
+
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #820263
+  background-color: var(--dark-grey);
 }
 
 code {
@@ -16,10 +24,10 @@ code {
 }
 
 .post {
-	background-color: #F8C0C8;
+	background-color: var(--dark-grey);
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	margin: 2%;
 	padding: 2%;
-	color: #546A76;
+	color: var(--white);
 }
