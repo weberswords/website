@@ -10,25 +10,19 @@ router.get('/api/hello', (req, res) => {
 	res.json('hello world')
 })
 
-router.get('/api/allposts', async (req, res, next) => {
-	try {
-		const result = await pool.query(`SELECT * FROM posts ORDER BY "createdAt" DESC`,
-		(query_error, query_result) => {
-			console.log(`Making get request...`)
-			if (query_error) {
-				console.log(`😢 An error has occurred: \n${query_error}`)
-				return next(query_error)
-			}
-			console.log(`Result returned.`)
-
-			return res.json(query_result.rows)
-			
-		})
-	} catch(error) {
-		console.log(`Oh no! ${error}`)
-		next(error)
-	}
-	
+router.get('/api/allposts', (req, res, next) => {
+	pool.query(`SELECT * FROM posts ORDER BY "createdAt" DESC`,
+			(query_error, query_result) => {
+				console.log(`Making get request...`)
+				if (query_error) {
+					console.log(`😢 An error has occurred: \n${query_error}`)
+					return next(query_error)
+				} else {
+					console.log(`Result returned.`)
+					console.log(`Returning ${JSON.stringify(query_result.rows)}`)
+					return res.json(query_result.rows)
+				}
+			})
 })
 
 router.post('/api/posts', (req, res, next) => {
