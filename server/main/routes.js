@@ -14,18 +14,15 @@ router.get('/api/allposts', async (req, res, next) => {
 	try {
 		const result = await pool.query(`SELECT * FROM posts ORDER BY "createdAt" DESC`,
 		(query_error, query_result) => {
-			console.log("Making get request...")
+			console.log(`Making get request...`)
 			if (query_error) {
 				console.log(`😢 An error has occurred: \n${query_error}`)
 				return next(query_error)
 			}
 			console.log(`Result returned.`)
 
-			if (query_result.rowCount > 0) {
-				res.json(query_result.rows)	
-			} else {
-				res.json(query_result)
-			}
+			return res.json(query_result.rows)
+			
 		})
 	} catch(error) {
 		console.log(`Oh no! ${error}`)
