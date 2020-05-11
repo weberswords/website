@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Post from '../Posts/post';
 
-import axios from 'axios';
-
 const Home = props => {
 	const [posts, setPosts] = useState([])
 
 	useEffect(() => {
-		console.log(`Getting posts...`);
-		axios.get('/api/allposts')
-		.then(res => setPosts(res.data))
-	}, [])
+		const fetchData = async () => {
+			const result = await fetch('/api/allposts');
+			setPosts(result.data);
+		};
+		fetchData();
+	}, []);
 
-	const renderPosts = (posts) => {
+	const renderPosts = posts => {
 		var postList = [];
 		if (posts.length < 1) {
 			return "There are no posts.";
