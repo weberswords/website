@@ -38,9 +38,8 @@ const Home = props => {
 				/>)
 			})
 			return allPosts
-		} else {
-			return "There are no posts."
 		} 
+		return "There are no posts."
 	}
 
 	return(

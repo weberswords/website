@@ -8,7 +8,7 @@ const Nav = props => {
 				<li id="nav-title"><a href="/">webs</a></li>
 				<li><a href="/">blog</a></li>
 				<li><a href="http://www.github.com/weberswords">github</a></li>
-				<li><a href="mailto:webs+contact@websonthewebs.com">contact</a></li>
+				<li><a href="mailto:contact@websonthewebs.com">contact</a></li>
 			</ul>
 		</div>
 		)

@@ -39,7 +39,7 @@ describe('nav', () => {
 	})
 	it('renders contact link', () => {
 		expected = "contact";
-		const expectedEmail = "mailto:webs+contact@websonthewebs.com"
+		const expectedEmail = "mailto:contact@websonthewebs.com"
 		output = nav.find('li').at(3).text();
 		const outputEmail = nav.find('li').at(3).find('a').props().href; 
 
