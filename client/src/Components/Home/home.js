@@ -16,7 +16,7 @@ const Home = props => {
 				.then(response => {
 					if (response.ok) {
 						response.json().then(json => {
-							console.log(`Posts ahve resutnred: ${json}`)
+							console.log(`Posts have resutnred: ${json}`)
 							setPosts(json)
 						})
 					}
