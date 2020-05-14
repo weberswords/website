@@ -24,6 +24,7 @@ li {
 	float: left;
 	background: var(--light-grey);
 	margin-right: 50px;
+	list-style: none; 
 }
 
 li > a {
@@ -54,7 +55,6 @@ li > a:after {
 	border: 20px solid var(--light-grey);
 	border-right-color: transparent;
 	border-bottom-color: transparent;
-
 	left: 100%;
 	top: 0;
 }
@@ -64,8 +64,8 @@ li:first-child > a {
 }
 
 li:first-child > a:before {
-	border-right-color: var(--dark-grey);
-	border-bottom-color: var(--dark-grey);
+	border-right-color: transparent;
+	border-bottom-color: transparent;
 }
 
 li:first-child > a:after {
@@ -106,8 +106,16 @@ li:last-child > a:after {
 	margin: 0;
 }
 
+.nav {
+	display: block;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
 .post {
-	background-color: var(--dark-grey);
+	background-color: var(--light-grey);
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	margin: 2%;
